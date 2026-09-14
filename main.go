@@ -41,6 +41,16 @@ func main() {
 		cmd := parts[0]
 
 		switch cmd {
+		case "add":
+			userTask := parts[1:]
+			if len(userTask) == 0 {
+				fmt.Println("Такое нельзя добавить")
+				continue
+			}
+			task := manager.Add(strings.Join(userTask, " "))
+
+			fmt.Println("Добавлена задача:")
+			fmt.Println(task)
 		case "help":
 			for key, value := range COMMANDS {
 				fmt.Println(key, "-", value)
