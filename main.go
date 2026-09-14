@@ -1,16 +1,41 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
+	"strings"
 	"task-cli/task"
 )
 
 func main() {
-	task := task.NewTask(1, "Learn Go")
+	manager := task.NewManager()
 
-	fmt.Println(task)
+	scanner := bufio.NewScanner(os.Stdin)
 
-	task.Complete()
+	for {
+		fmt.Print("Введите команду: ")
+		if !scanner.Scan() {
+			if err := scanner.Err(); err != nil {
+				fmt.Println("Ошибка ввода:", err)
+			}
+			return
+		}
 
-	fmt.Println(task)
+		input := scanner.Text()
+		parts := strings.Fields(input)
+		if len(parts) == 0 {
+			fmt.Println("Пустая команда, попробуйте другую")
+			continue
+		}
+		cmd := parts[0]
+
+		switch cmd {
+		case "list":
+			fmt.Println(manager.List())
+		default:
+			fmt.Println("Такой команды нет, попробуйте другую")
+			continue
+		}
+	}
 }
