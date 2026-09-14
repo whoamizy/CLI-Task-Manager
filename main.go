@@ -1,7 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"task-cli/task"
+)
 
 func main() {
-	fmt.Println("Hello task manager")
+	task := task.NewTask(1, "Learn Go")
+
+	fmt.Println(task)
+
+	task.Complete()
+
+	fmt.Println(task)
 }
