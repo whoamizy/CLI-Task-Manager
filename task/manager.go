@@ -36,7 +36,7 @@ func (m *Manager) Complete(id int) error {
 		}
 	}
 
-	return errors.New("task not found")
+	return errors.New("Задача не найдена")
 }
 
 func (m *Manager) Delete(id int) error {
@@ -50,7 +50,7 @@ func (m *Manager) Delete(id int) error {
 		}
 	}
 
-	return errors.New("task not found")
+	return errors.New("Задача не найдена")
 }
 
 func (m *Manager) Find(query string) []*Task {
