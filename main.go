@@ -42,6 +42,20 @@ func main() {
 		cmd := parts[0]
 
 		switch cmd {
+		case "find":
+			if len(parts) < 2 {
+				fmt.Println("Укажи Title задачи")
+				continue
+			}
+			query := strings.Join(parts[1:], " ")
+			res := manager.Find(query)
+			if len(res) == 0 {
+				fmt.Println("Ничего не найдено")
+				continue
+			}
+			for _, task := range res {
+				fmt.Println(task)
+			}
 		case "delete":
 			if len(parts) < 2 {
 				fmt.Println("Укажи ID задачи")
