@@ -42,6 +42,22 @@ func main() {
 		cmd := parts[0]
 
 		switch cmd {
+		case "delete":
+			if len(parts) < 2 {
+				fmt.Println("Укажи ID задачи")
+				continue
+			}
+			taskId, err := strconv.Atoi(parts[1])
+			if err != nil {
+				fmt.Println("Некорректный ID")
+				continue
+			}
+			err = manager.Delete(taskId)
+			if err != nil {
+				fmt.Println(err)
+				continue
+			}
+			fmt.Println("Задача удалена")
 		case "done":
 			if len(parts) < 2 {
 				fmt.Println("Укажи ID задачи")
