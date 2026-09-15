@@ -9,7 +9,7 @@ import (
 	"task-cli/task"
 )
 
-var COMMANDS = map[string]string{
+var commands = map[string]string{
 	"add":    "Добавить новую задачу",
 	"list":   "Показать список всех задач",
 	"done":   "Отметить задачу как выполненную",
@@ -61,12 +61,12 @@ func main() {
 				fmt.Println("Укажи ID задачи")
 				continue
 			}
-			taskId, err := strconv.Atoi(parts[1])
+			taskID, err := strconv.Atoi(parts[1])
 			if err != nil {
 				fmt.Println("Некорректный ID")
 				continue
 			}
-			err = manager.Delete(taskId)
+			err = manager.Delete(taskID)
 			if err != nil {
 				fmt.Println(err)
 				continue
@@ -77,12 +77,12 @@ func main() {
 				fmt.Println("Укажи ID задачи")
 				continue
 			}
-			taskId, err := strconv.Atoi(parts[1])
+			taskID, err := strconv.Atoi(parts[1])
 			if err != nil {
 				fmt.Println("Некорректный ID")
 				continue
 			}
-			err = manager.Complete(taskId)
+			err = manager.Complete(taskID)
 			if err != nil {
 				fmt.Println(err)
 				continue
@@ -99,7 +99,7 @@ func main() {
 			fmt.Println("Добавлена задача:")
 			fmt.Println(task)
 		case "help":
-			for key, value := range COMMANDS {
+			for key, value := range commands {
 				fmt.Println(key, "-", value)
 			}
 		case "list":
