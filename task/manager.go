@@ -31,6 +31,9 @@ func (m *Manager) List() []*Task {
 func (m *Manager) Complete(id int) error {
 	for _, task := range m.tasks {
 		if task.ID == id {
+			if task.Done {
+				return errors.New("Задача уже выполнена")
+			}
 			task.Complete()
 			return nil
 		}
