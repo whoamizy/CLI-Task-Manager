@@ -31,23 +31,29 @@ func (m *Manager) List() []*Task {
 func (m *Manager) Complete(id int) error {
 	for _, task := range m.tasks {
 		if task.ID == id {
+			if task.Done {
+				return errors.New("Задача уже выполнена")
+			}
 			task.Complete()
 			return nil
 		}
 	}
 
-	return errors.New("task not found")
+	return errors.New("Задача не найдена")
 }
 
 func (m *Manager) Delete(id int) error {
 	for index, task := range m.tasks {
 		if task.ID == id {
 			m.tasks = append(m.tasks[:index], m.tasks[index+1:]...)
+			if len(m.tasks) == 0 {
+				m.nextID = 1
+			}
 			return nil
 		}
 	}
 
-	return errors.New("task not found")
+	return errors.New("Задача не найдена")
 }
 
 func (m *Manager) Find(query string) []*Task {
