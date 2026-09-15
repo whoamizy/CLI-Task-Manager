@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 	"task-cli/task"
 )
@@ -41,6 +42,22 @@ func main() {
 		cmd := parts[0]
 
 		switch cmd {
+		case "done":
+			if len(parts) < 2 {
+				fmt.Println("Укажи ID задачи")
+				continue
+			}
+			taskId, err := strconv.Atoi(parts[1])
+			if err != nil {
+				fmt.Println("Некорректный ID")
+				continue
+			}
+			err = manager.Complete(taskId)
+			if err != nil {
+				fmt.Println(err)
+				continue
+			}
+			fmt.Println("Задача завершена")
 		case "add":
 			userTask := parts[1:]
 			if len(userTask) == 0 {
