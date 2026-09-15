@@ -43,6 +43,9 @@ func (m *Manager) Delete(id int) error {
 	for index, task := range m.tasks {
 		if task.ID == id {
 			m.tasks = append(m.tasks[:index], m.tasks[index+1:]...)
+			if len(m.tasks) == 0 {
+				m.nextID = 1
+			}
 			return nil
 		}
 	}
